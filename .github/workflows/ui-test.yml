@@ -1,0 +1,34 @@
+name: UI Test
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  ui-test:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout demo site
+        uses: actions/Checkout@v4
+        with:
+          path: demo-site
+
+      - name: Checkout test automation project
+        uses: actions/Checkout@v4
+        with:
+          repository: HamanoRyouta/test-automation-project
+          ref: main
+          path: test-automation-project
+
+      - name: Run ATgo
+        shell: cmd
+        run: | "D:\ATgo\V10.2\ATgo\ATgoV10.2.0.310_Win64\ATgoCUI.bat" ^
+                --project "%GITHUB_WORKSPACE%\test-automation-project\atgo_sample" ^
+                --run "テスト1.scenario" ^
+                --doInspection=true
+      - name: Upload test result
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-result
+          path: test-automation-project/demo-site/output
