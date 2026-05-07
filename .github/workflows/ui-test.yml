@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout demo site
         uses: actions/Checkout@v4
-        with:
-          path: demo-site
 
       - name: Checkout test automation project
         uses: actions/Checkout@v4
