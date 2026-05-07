@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>試験申込みサンプルサイト</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="inlucde/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="inlucde/css/signin.css" rel="stylesheet">
+
+    <script type="text/javascript" src="inlucde/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="inlucde/moment/min/moment.min.js"></script>
+</head>
+
+<body class="text-center">
+    <form class="form-signin" method="get" action="index.html">
+        <img class="mb-4" src="inlucde/img/logo-1.png" alt="" width="144">
+        <h1 class="h3 mb-3 font-weight-normal">申込み完了</h1>
+        <p style="margin-top:30px;">お申込みありがとうございました。</p>
+        <p><b style="margin:30px;"id="showDate"></b><p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="id_logout" >ログアウト</button>
+    </form>
+    <script type="text/javascript">
+        $(function getTime() {
+            var myDate = new Date();
+            var year = zeroFill(myDate.getFullYear());
+            var month = zeroFill(myDate.getMonth() + 1);
+            var date = zeroFill(myDate.getDate());
+            var hours = zeroFill(myDate.getHours());
+            var minutes = zeroFill(myDate.getMinutes());
+            var seconds = zeroFill(myDate.getSeconds());
+
+            function zeroFill(i) {
+                if (i >= 0 && i <= 9) {
+                    return "0" + i;
+                } else {
+                    return i;
+                }
+            }
+
+            $("#showDate").html(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
+        })
+    </script>
+</body>
+
+</html>
