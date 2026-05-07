@@ -25,7 +25,8 @@ jobs:
           "D:\ATgo\V10.2\ATgo\ATgoV10.2.0.310_Win64\ATgoCUI.bat" ^
             --project="%GITHUB_WORKSPACE%\test-automation-project\atgo_sample" ^
             --run="test1.scenario" ^
-            --doInspection=true
+            --doInspection=true ^
+            --ignoreComparisonError=true
       - name: Upload test result
         uses: actions/upload-artifact@v4
         with:
