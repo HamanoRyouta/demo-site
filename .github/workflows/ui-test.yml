@@ -21,6 +21,9 @@ jobs:
         run: |
           Xvfb :99 -ac -screen 0 1280x720x16 -nolisten tcp &
           echo "DISPLAY=:99" >> $GITHUB_ENV
+      - name: Create license file
+        run: |
+          echo "${ATGO_LICENSE"} > /tmp/license.txt
 
       - name: Run ATgo
         run: | 
@@ -31,7 +34,7 @@ jobs:
             --project="${GITHUB_WORKSPACE}/atgo_sample" \
             --run="test1.scenario" \
             --doInspection=true \
-            --license="${ATGO_LICENSE}" \
+            --license="/tmp/license.txt" \
             --ignoreComparisonError=true
 
       - name: Upload test result
