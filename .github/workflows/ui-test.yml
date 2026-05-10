@@ -39,7 +39,7 @@ jobs:
           sed -i 's/\r$//' ATgoCUI.sh
 
           ./ATgoCUI.sh \
-            --project="${GITHUB_WORKSPACE}/atgo_sample" \
+            --project="${GITHUB_WORKSPACE}/test-automation-project/atgo_sample" \
             --run="test1.scenario" \
             --doInspection=true \
             --license="/tmp/license.txt" \
