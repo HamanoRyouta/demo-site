@@ -11,7 +11,7 @@ jobs:
       image: atgo/test:8.8.0
 
     env:
-      ATGO_LICENSE: ${{ secrets.ATGO_LICENCE }}
+      ATGO_LICENSE: ${{ secrets.ATGO_LICENSE }}
 
     steps:
       - name: Checkout demo site
@@ -31,7 +31,7 @@ jobs:
             --project="${GITHUB_WORKSPACE}/atgo_sample" \
             --run="test1.scenario" \
             --doInspection=true \
-            --licence="${ATGO_LICENCE}" \
+            --license="${ATGO_LICENSE}" \
             --ignoreComparisonError=true
 
       - name: Upload test result
