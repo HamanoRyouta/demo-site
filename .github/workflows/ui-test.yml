@@ -19,16 +19,15 @@ jobs:
 
       - name: Start virtual display
         run: |
-          xvfb :99 -ac -screen 0 1280x720x16 -nolisten tcp &
+          Xvfb :99 -ac -screen 0 1280x720x16 -nolisten tcp &
           echo "DISPLAY=:99" >> $GITHUB_ENV
 
       - name: Run ATgo
-        shell: cmd
         run: | 
           cd /opt/atgo
           sed -i 's/\r$//' ATgoCUI.sh
 
-          ./ATgoCUI.sh ^
+          ./ATgoCUI.sh \
             --project="${GITHUB_WORKSPACE}/atgo_sample" \
             --run="test1.scenario" \
             --doInspection=true \
