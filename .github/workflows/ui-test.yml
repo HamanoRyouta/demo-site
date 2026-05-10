@@ -17,6 +17,13 @@ jobs:
       - name: Checkout demo site
         uses: actions/Checkout@v4
 
+      - name: Checkout test automation project
+        uses: actions/Checkout@v4
+        with:
+          repository: HamanoRyouta/test-automation-project
+          ref: main
+          path: test-automation-project
+
       - name: Start virtual display
         run: |
           Xvfb :99 -ac -screen 0 1280x720x16 -nolisten tcp &
@@ -24,12 +31,7 @@ jobs:
       - name: Create license file
         run: |
           echo "${ATGO_LICENSE}" > /tmp/license.txt
-      - name: Check workspace
-        run: |
-          pwd
-          ls
-          ls ${GITHUB_WORKSPACE}
-          find ${GITHUB_WORKSPACE} -maxdepth 3 -type d
+        
 
       - name: Run ATgo
         run: | 
@@ -47,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ui-test-result
-          path: atgo_sample/output 
+          path: atgo_sample/output
