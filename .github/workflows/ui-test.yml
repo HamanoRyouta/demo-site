@@ -10,6 +10,12 @@ jobs:
     container:
       image: atgo/test:8.8.0
 
+    strategy:
+      matrix:
+        scenario:
+          - test1.scenario
+          - test2.scenario
+
     env:
       ATGO_LICENSE: ${{ secrets.ATGO_LICENSE }}
 
@@ -33,14 +39,14 @@ jobs:
           echo "${ATGO_LICENSE}" > /tmp/license.txt
         
 
-      - name: Run ATgo
+      - name: Run ATgo1
         run: | 
           cd /opt/atgo
           sed -i 's/\r$//' ATgoCUI.sh
 
           ./ATgoCUI.sh \
             --project="${GITHUB_WORKSPACE}/test-automation-project/atgo_sample" \
-            --run="test1.scenario" \
+            --run="${{matrix.scenario}}" \
             --doInspection=true \
             --license="/tmp/license.txt" \
             --ignoreComparisonError=true
