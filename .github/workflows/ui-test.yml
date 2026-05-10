@@ -49,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ui-test-result
-          path: atgo_sample/output
+          path: "${GITHUB_WORKSPACE}/test-automation-project/atgo_sample/output
