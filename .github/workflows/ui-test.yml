@@ -6,29 +6,37 @@ on:
 
 jobs:
   ui-test:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    container:
+      image: atgo/test:8.8.0
+
+    env:
+      ATGO_LICENSE: ${{ secrets.ATGO_LICENCE }}
 
     steps:
       - name: Checkout demo site
         uses: actions/Checkout@v4
 
-      - name: Checkout test automation project
-        uses: actions/Checkout@v4
-        with:
-          repository: HamanoRyouta/test-automation-project
-          ref: main
-          path: test-automation-project
+      - name: Start virtual display
+        run: |
+          xvfb :99 -ac -screen 0 1280x720x16 -nolisten tcp &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
 
       - name: Run ATgo
         shell: cmd
         run: | 
-          "D:\ATgo\V10.2\ATgo\ATgoV10.2.0.310_Win64\ATgoCUI.bat" ^
-            --project="%GITHUB_WORKSPACE%\test-automation-project\atgo_sample" ^
-            --run="test1.scenario" ^
-            --doInspection=true ^
+          cd /opt/atgo
+          sed -i 's/\r$//' ATgoCUI.sh
+
+          ./ATgoCUI.sh ^
+            --project="${GITHUB_WORKSPACE}/atgo_sample" \
+            --run="test1.scenario" \
+            --doInspection=true \
+            --licens="${ATGO_LICENCE}" \
             --ignoreComparisonError=true
+
       - name: Upload test result
         uses: actions/upload-artifact@v4
         with:
           name: ui-test-result
-          path: test-automation-project/atgo_sample/output
+          path: atgo_sample/output
