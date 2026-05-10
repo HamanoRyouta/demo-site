@@ -24,6 +24,12 @@ jobs:
       - name: Create license file
         run: |
           echo "${ATGO_LICENSE}" > /tmp/license.txt
+      - name: Check workspace
+        run: |
+          pwd
+          ls
+          ls ${GITHUB_WORKSPACE}
+          find ${GITHUB_WORKSPACE} -maxdepth 3 -type d
 
       - name: Run ATgo
         run: | 
@@ -41,4 +47,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ui-test-result
-          path: atgo_sample/output
+          path: atgo_sample/output 
