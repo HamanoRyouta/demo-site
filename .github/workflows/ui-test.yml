@@ -23,7 +23,7 @@ jobs:
           echo "DISPLAY=:99" >> $GITHUB_ENV
       - name: Create license file
         run: |
-          echo "${ATGO_LICENSE"} > /tmp/license.txt
+          echo "${ATGO_LICENSE}" > /tmp/license.txt
 
       - name: Run ATgo
         run: | 
