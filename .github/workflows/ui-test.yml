@@ -31,7 +31,7 @@ jobs:
             --project="${GITHUB_WORKSPACE}/atgo_sample" \
             --run="test1.scenario" \
             --doInspection=true \
-            --licens="${ATGO_LICENCE}" \
+            --licence="${ATGO_LICENCE}" \
             --ignoreComparisonError=true
 
       - name: Upload test result
